@@ -13,3 +13,10 @@
 #include <stdint.h>
 
 #endif
+
+#ifdef _WIN32
+	#include <Windows.h>
+#else
+	#include <dlfcn.h>
+	#include <link.h>
+#endif

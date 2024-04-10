@@ -7,5 +7,7 @@
 #include <fmt/color.h>
 #include <fmt/chrono.h>
 #include <samp-gdk/sampgdk.h>
+#include <urmem/urmem.hpp>
 
 #include "log.hpp"
+#include "hooks.hpp"

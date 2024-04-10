@@ -6,6 +6,7 @@ PLUGIN_EXPORT bool PLUGIN_CALL Load(void** ppData)
 	if (result)
 	{
 		console::print("sampgdk loaded");
+		hooks::install();
 	}
 	
 	return result;

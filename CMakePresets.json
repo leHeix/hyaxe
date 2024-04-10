@@ -56,7 +56,8 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_CXX_FLAGS": "-m32",
-                "CMAKE_C_FLAGS":  "-m32"
+                "CMAKE_C_FLAGS":  "-m32",
+                "VCPKG_TARGET_TRIPLET": "x86-linux"
             },
             "condition": {
               "type": "equals",
@@ -67,12 +68,13 @@
                 "value": "x86",
                 "strategy": "external"
             },
+            "toolchainFile": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
             "vendor": {
                 "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
                   "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}",
                   "forceWSL1Toolset": true
                 }
             }
-        },
+        }
     ]
 }

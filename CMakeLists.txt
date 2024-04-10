@@ -33,3 +33,8 @@ set_target_properties(hyaxe PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY  "${CMAKE_CURRENT_SOURCE_DIR}/server/plugins"
 )
 target_precompile_headers(hyaxe PUBLIC "src/pch.h")
+
+if(UNIX)
+	target_link_libraries(hyaxe PRIVATE dl)
+	target_compile_definitions(hyaxe PRIVATE -D_GNU_SOURCE)
+endif()
