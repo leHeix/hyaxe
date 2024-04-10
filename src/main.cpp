@@ -1,11 +1,14 @@
-﻿// hyaxe.cpp : Defines the entry point for the application.
-//
-
-#include "main.hpp"
+﻿#include "main.hpp"
 
 PLUGIN_EXPORT bool PLUGIN_CALL Load(void** ppData)
 {
-	return sampgdk::Load(ppData);
+	bool result = sampgdk::Load(ppData);
+	if (result)
+	{
+		console::print("sampgdk loaded");
+	}
+	
+	return result;
 }
 
 PLUGIN_EXPORT void PLUGIN_CALL Unload()

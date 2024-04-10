@@ -1,9 +1,11 @@
-﻿// hyaxe.h : Include file for standard system include files,
-// or project specific include files.
+﻿#pragma once
 
-#pragma once
+// Precompiled headers
+#include "pch.h"
 
-#include <iostream>
+#include <fmt/core.h>
+#include <fmt/color.h>
+#include <fmt/chrono.h>
 #include <samp-gdk/sampgdk.h>
 
-// TODO: Reference additional headers your program requires here.
+#include "log.hpp"

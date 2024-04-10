@@ -2,5 +2,7 @@
 /out
 !/server/
 /server/*
+!/server/server.cfg
+!/server/plugins/*.cfg
 !/server/scriptfiles/
 /server/scriptfiles/*
