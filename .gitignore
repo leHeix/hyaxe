@@ -1,0 +1,6 @@
+/.vs
+/out
+!/server/
+/server/*
+!/server/scriptfiles/
+/server/scriptfiles/*
