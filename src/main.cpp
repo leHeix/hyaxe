@@ -1,7 +1,7 @@
 ﻿// hyaxe.cpp : Defines the entry point for the application.
 //
 
-#include "hyaxe.h"
+#include "main.hpp"
 
 PLUGIN_EXPORT bool PLUGIN_CALL Load(void** ppData)
 {

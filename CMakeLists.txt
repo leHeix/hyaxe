@@ -12,6 +12,7 @@ set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
 add_compile_definitions(
 	HAVE_STDINT_H
+	$<$<PLATFORM_ID:Linux>:LINUX>
 )
 add_subdirectory(lib)
 

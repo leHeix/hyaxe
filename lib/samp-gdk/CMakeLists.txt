@@ -1,4 +1,4 @@
-add_library(SAMPGDK STATIC "sampgdk.c")
+add_library(SAMPGDK STATIC "sampgdk.h" "sampgdk.c")
 target_compile_definitions(SAMPGDK PUBLIC 
 	SAMPGDK_STATIC=1
 	SAMPGDK_AMALGAMATION=1
