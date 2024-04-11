@@ -4,3 +4,4 @@ EXPORTS
 	Unload
 	Supports
 	ProcessTick
+	OnPlayerConnect

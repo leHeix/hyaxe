@@ -7,6 +7,8 @@ PLUGIN_EXPORT bool PLUGIN_CALL Load(void** ppData)
 	{
 		console::print("sampgdk loaded");
 		hooks::install();
+		hyaxe::server_instance = std::make_unique<hyaxe::server>();
+		console::print("load finished");
 	}
 	
 	return result;

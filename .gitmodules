@@ -4,3 +4,6 @@
 [submodule "lib/urmem"]
 	path = lib/urmem
 	url = https://github.com/katursis/urmem
+[submodule "lib/unordered_dense"]
+	path = lib/unordered_dense
+	url = https://github.com/martinus/unordered_dense

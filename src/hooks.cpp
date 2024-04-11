@@ -2,7 +2,35 @@
 
 static bool ContainsInvalidChars(char* name)
 {
-	return true;
+#ifdef __clang__
+	#pragma clang diagnostic push
+	#pragma clang diagnostic ignored "-Winvalid-source-encoding"
+#endif
+
+	static const std::vector<short> valid_chars{
+		'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+		'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+		'[', ']', '(', ')', '$', '@', '.', '_',
+		'ï', 'ò', 'ù', 'ú', 'û', 'ü', 'ý', 'þ', 'ÿ', '÷', 'ø', 'ö',
+		'Š', 'Œ', 'Ž', 'š', 'ž', 'Ÿ', 'õ', 'À', 'Á', 'Â', 'Ã', 'Ä',
+		'Å', 'Æ', 'Ç', 'ñ', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï',
+		'Ð', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'Ù', 'Ú', 'Û', 'Ü',
+		'Ý', 'Þ', 'ß', 'à', 'á', 'â', 'ã', 'ä', 'å', 'î', 'ç', 'è',
+		'é', 'ê', 'ë', 'ì', 'í', ' '
+	};
+
+#ifdef __clang__
+	#pragma clang diagnostic pop
+#endif
+
+	while (*name)
+	{
+		if (std::find(valid_chars.begin(), valid_chars.end(), *name++) == valid_chars.end())
+			return true;
+	}
+
+	return false;
 }
 
 bool hooks::install()

@@ -1,5 +1,11 @@
 ﻿cmake_minimum_required (VERSION 3.21)
 
+# Enable Hot Reload for MSVC compilers if supported.
+if (POLICY CMP0141)
+  cmake_policy(SET CMP0141 NEW)
+  set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
+endif()
+
 project ("hyaxe")
 
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
@@ -23,14 +29,15 @@ file(GLOB_RECURSE HYAXE_SRC_FILES
 
 add_library(hyaxe SHARED "src/exports.def" ${HYAXE_SRC_FILES})
 target_compile_features(hyaxe PRIVATE cxx_std_20 c_std_11)
-target_link_libraries(hyaxe PRIVATE SAMPGDK fmt::fmt)
-target_include_directories(hyaxe PRIVATE ./lib)
+target_link_libraries(hyaxe PRIVATE SAMPGDK fmt::fmt unordered_dense::unordered_dense)
+target_include_directories(hyaxe PRIVATE ./lib ./lib/unordered_dense/include)
 set_target_properties(hyaxe PROPERTIES
 	UNITY_BUILD ON
 	UNITY_BUILD_BATCH_SIZE 15
 	PREFIX ""
-	LIBRARY_OUTPUT_DIRECTORY  "${CMAKE_CURRENT_SOURCE_DIR}/server/plugins"
-	RUNTIME_OUTPUT_DIRECTORY  "${CMAKE_CURRENT_SOURCE_DIR}/server/plugins"
+	LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/server/plugins"
+	RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/server/plugins"
+	PDB_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/server/plugins"
 )
 target_precompile_headers(hyaxe PUBLIC "src/pch.h")
 

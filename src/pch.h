@@ -6,6 +6,12 @@
 #include <string_view>
 #include <utility>
 #include <chrono>
+#include <vector>
+#include <memory>
+#include <unordered_map>
+#include <array>
+#include <any>
+#include <optional>
 
 #else
 
