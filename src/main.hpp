@@ -13,7 +13,16 @@
 #include <fmt/color.h>
 #include <fmt/chrono.h>
 #include <samp-gdk/sampgdk.h>
+
+#ifdef __clang__
+	#pragma clang diagnostic push
+	#pragma clang diagnostic ignored "-Wunsequenced"
+#endif
 #include <RakNet/RakNet.h>
+#ifdef __clang__
+	#pragma clang diagnostic pop
+#endif
+
 #include <urmem/urmem.hpp>
 #include <ankerl/unordered_dense.h>
 
@@ -21,6 +30,7 @@
 #include "hooks.hpp"
 #include "raknet/rakserver.hpp"
 
+#include "server/publics.hpp"
 #include "player/player.hpp"
 #include "server/server.hpp"
 

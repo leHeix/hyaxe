@@ -12,6 +12,7 @@
 #include <array>
 #include <any>
 #include <optional>
+#include <functional>
 
 #else
 

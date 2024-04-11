@@ -22,3 +22,20 @@ PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerConnect(int playerid) {
 	hyaxe::server_instance->register_player(playerid);
 	return true;
 }
+
+static public_hook<callbacks::exec_order::init> _("OnGameModeInit", []() -> cell {
+	rakserver_instance = std::make_unique<rakserver>();
+	if (!rakserver_instance->initialize(plugin_data))
+	{
+		console::print("failed to initialize rakserver");
+		sampgdk::Unload();
+		return ~1;
+	}
+
+	console::print("rakserver initialized successfully");
+
+	hyaxe::server_instance = std::make_unique<hyaxe::server>();
+	console::print("initialization finished");
+
+	return 1;
+});

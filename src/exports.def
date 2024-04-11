@@ -4,5 +4,4 @@ EXPORTS
 	Unload
 	Supports
 	ProcessTick
-	OnGameModeInit
-	OnPlayerConnect
+	OnPublicCall
