@@ -1,3 +1,4 @@
 add_subdirectory(samp-sdk)
 add_subdirectory(samp-gdk)
 add_subdirectory(unordered_dense)
+add_subdirectory(RakNet)
