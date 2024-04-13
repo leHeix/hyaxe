@@ -24,7 +24,7 @@ public:
 	}
 
 	template<class... Args>
-	[[nodiscard]] inline static std::shared_ptr<timer> create(const std::function<void(Args...)>& cb, Args&&... args)
+	[[nodiscard]] inline static std::shared_ptr<timer> create(const std::function<void(Args...)>& cb, Args... args)
 	{
 		return std::make_shared<timer>(cb, std::forward<Args>(args)...);
 	}
@@ -32,18 +32,10 @@ public:
 	/**
 	  * @brief Starts the timer
 	  * @param interval Interval of milliseconds before the timer gets be called for the first time
-	  * @param repeat Interval of milliseconds before the timer gets be called after the first time
+	  * @param repeat Interval of milliseconds before the timer gets be called after the first time. If this value is 0, the timer will only be called once
       * @note If the timer is set to run only once, holding a reference to this timer only to destroy it after is not needed, the timer will destroy and cleanup memory itself.
       */
-	void start(uint64_t interval, uint64_t repeat);
-
-	/**
-	  * @brief Starts the timer
-	  * @param interval Interval of milliseconds before the timer gets called
-	  * @param repeat Sets the timer to repeat using the same interval
-	  * @note If the timer is set to run only once, holding a reference to this timer only to destroy it after is not needed, the timer will destroy and cleanup memory itself.
-	  */
-	inline void start(uint64_t interval, bool repeat = false);
+	void start(uint64_t interval, uint64_t repeat = 0);
 
 	/**
 	  * @brief Stops the timer

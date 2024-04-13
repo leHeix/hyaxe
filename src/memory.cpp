@@ -66,9 +66,9 @@ bool memory::setup()
 		return false;
 	}
 
-	urmem::bytearray_t empty_mem{ WRONG_PACKET_ID_BRANCH_SIZE, 0x90 };
-	WrongPacketIDBranch_patch = urmem::patch::make(WRONG_PACKET_ID_BRANCH_ADDRESS, empty_mem);
-	WrongPacketIDBranch_patch->enable();
+	//urmem::bytearray_t empty_mem{ WRONG_PACKET_ID_BRANCH_SIZE, 0x90 };
+	//WrongPacketIDBranch_patch = urmem::patch::make(WRONG_PACKET_ID_BRANCH_ADDRESS, empty_mem);
+	//WrongPacketIDBranch_patch->enable();
 	console::print("nopped WrongPacketIDBranch");
 
 	console::print("all hooks installed successfully");

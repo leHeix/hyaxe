@@ -13,6 +13,12 @@ static public_hook _auth_opc("OnPlayerConnect", [](unsigned short playerid) -> c
             Recuerda que los nombres como {CB3126}Miguel_Gamer{DADADA} o que contengan insultos\n\
             no están permitidos, procura ponerte un nombre que parezca real.",
 		"Entendido");
+		
+		std::function<void(unsigned short)> timer_cb = [](unsigned short playerid) {
+			Kick(playerid);
+		};
+
+		timer::create(timer_cb, playerid)->start(300);
 
 		return ~1;
 	}

@@ -45,11 +45,6 @@ void timer::start(uint64_t timeout, uint64_t repeat)
 	_started = true;
 }
 
-inline void timer::start(uint64_t timeout, bool repeat)
-{
-	start(timeout, (repeat ? timeout : 0u));
-}
-
 inline void timer::stop()
 {
 	uv_timer_stop(&_handle);

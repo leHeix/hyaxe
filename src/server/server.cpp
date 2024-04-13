@@ -46,13 +46,6 @@ static public_hook<callbacks::exec_order::init> _sv_init_ogmi("OnGameModeInit", 
 	hyaxe::server_instance = std::make_unique<hyaxe::server>();
 	console::print("initialization finished");
 
-	std::function<void(int)> timer_cb = [](int mamaguebo) {
-		console::print("mamaguebo: {}", mamaguebo);
-	};
-
-	auto timerp = timer::create(timer_cb, 422);
-	timerp->start(3000, true);
-
 	return 1;
 });
 
