@@ -51,7 +51,8 @@ namespace callbacks
 		init = 0,
 		prehook = 1,
 		hook = 2,
-		posthook = 3
+		posthook = 3,
+		final = 4
 	};
 
 	struct public_hook_impl

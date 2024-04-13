@@ -25,13 +25,16 @@
 
 #include <urmem/urmem.hpp>
 #include <ankerl/unordered_dense.h>
+#include <pqxx/connection>
+#include <uv.h>
 
 #include "log.hpp"
-#include "hooks.hpp"
+#include "memory.hpp"
 #include "raknet/rakserver.hpp"
 
 #include "server/publics.hpp"
 #include "player/player.hpp"
 #include "server/server.hpp"
+#include "server/timers.hpp"
 
 inline void** plugin_data{ nullptr };

@@ -6,9 +6,13 @@ namespace hyaxe
 {
 	class server
 	{
+		std::unique_ptr<pqxx::connection> _db{ nullptr };
 		std::array<std::unique_ptr<player>, MAX_PLAYERS> _players{};
+
 	public:
-		void register_player(unsigned short playerid);
+		server();
+
+		void add_player(unsigned short playerid);
 		void delete_player(const std::unique_ptr<player>& player);
 		void delete_player(unsigned short playerid);
 

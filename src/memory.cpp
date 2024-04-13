@@ -33,12 +33,11 @@ static bool ContainsInvalidChars(char* name)
 	return false;
 }
 
-bool hooks::install()
+bool memory::setup()
 {
 #ifdef _WIN32
 	urmem::sig_scanner scanner{};
-	urmem::address_t base_address{};
-	base_address = (urmem::address_t)GetModuleHandle(NULL);
+	urmem::address_t base_address = (urmem::address_t)GetModuleHandle(NULL);
 
 	if (!scanner.init(base_address))
 	{
@@ -67,6 +66,11 @@ bool hooks::install()
 		return false;
 	}
 
+	urmem::bytearray_t empty_mem{ WRONG_PACKET_ID_BRANCH_SIZE, 0x90 };
+	WrongPacketIDBranch_patch = urmem::patch::make(WRONG_PACKET_ID_BRANCH_ADDRESS, empty_mem);
+	WrongPacketIDBranch_patch->enable();
+	console::print("nopped WrongPacketIDBranch");
+
 	console::print("all hooks installed successfully");
 	return true;
 }
@@ -86,7 +90,7 @@ static bool memory_compare(const char* data, const char* pattern, const char* ma
 }
 #endif
 
-unsigned int hooks::find_pattern(const char* pattern, const char* mask)
+unsigned int memory::find_pattern(const char* pattern, const char* mask)
 {
 #ifdef __linux__
 	struct {

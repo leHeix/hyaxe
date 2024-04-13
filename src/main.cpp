@@ -8,7 +8,7 @@ PLUGIN_EXPORT bool PLUGIN_CALL Load(void** ppData)
 	if (result)
 	{
 		console::print("sampgdk loaded");
-		hooks::install();
+		memory::setup();
 	}
 	
 	return result;
@@ -16,6 +16,18 @@ PLUGIN_EXPORT bool PLUGIN_CALL Load(void** ppData)
 
 PLUGIN_EXPORT void PLUGIN_CALL Unload()
 {
+	if (uv_loop_close(uv_default_loop()) == UV_EBUSY)
+	{
+		uv_walk(uv_default_loop(), [](uv_handle_t* h, void* /*arg*/) {
+			uv_close(h, [](uv_handle_t* h) {
+				if (!h || !h->loop || uv_is_closing(h))
+					return;
+			});
+		}, nullptr);
+		uv_run(uv_default_loop(), UV_RUN_DEFAULT);
+		uv_loop_close(uv_default_loop());
+	}
+
 	sampgdk::Unload();
 }
 
@@ -26,5 +38,5 @@ PLUGIN_EXPORT unsigned PLUGIN_CALL Supports()
 
 PLUGIN_EXPORT void PLUGIN_CALL ProcessTick()
 {
-	return;
+	uv_run(uv_default_loop(), UV_RUN_NOWAIT);
 }

@@ -13,6 +13,7 @@
 #include <any>
 #include <optional>
 #include <functional>
+#include <regex>
 
 #else
 

@@ -14,6 +14,8 @@ set(VCPKG_TARGET_ARCHITECTURE x86)
 set(VCPKG_LIBRARY_LINKAGE static)
 set(VCPKG_CRT_LINKAGE static)
 find_package(fmt CONFIG REQUIRED)
+find_package(libpqxx CONFIG REQUIRED)
+find_package(libuv CONFIG REQUIRED)
 
 add_compile_definitions(
 	HAVE_STDINT_H
@@ -29,7 +31,14 @@ file(GLOB_RECURSE HYAXE_SRC_FILES
 
 add_library(hyaxe SHARED "src/exports.def" ${HYAXE_SRC_FILES})
 target_compile_features(hyaxe PRIVATE cxx_std_20 c_std_11)
-target_link_libraries(hyaxe PRIVATE SAMPGDK RakNet fmt::fmt unordered_dense::unordered_dense)
+target_link_libraries(hyaxe PRIVATE 
+	SAMPGDK 
+	RakNet 
+	fmt::fmt 
+	unordered_dense::unordered_dense
+	libpqxx::pqxx
+	$<IF:$<TARGET_EXISTS:libuv::uv_a>,libuv::uv_a,libuv::uv>
+)
 target_include_directories(hyaxe PRIVATE ./lib ./lib/unordered_dense/include)
 set_target_properties(hyaxe PROPERTIES
 	UNITY_BUILD ON
