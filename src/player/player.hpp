@@ -13,9 +13,9 @@ class player
 public:
 	player(unsigned short playerid) : _playerid(playerid)
 	{
-		_name.resize(MAX_PLAYER_NAME);
-		GetPlayerName(playerid, _name.data(), MAX_PLAYER_NAME);
-		_name.shrink_to_fit();
+		char name_buf[MAX_PLAYER_NAME]; // this is some bullshit
+		GetPlayerName(playerid, name_buf, MAX_PLAYER_NAME);
+		_name = name_buf;
 	}
 
 	~player();

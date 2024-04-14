@@ -12,6 +12,9 @@ namespace hyaxe
 	public:
 		server();
 
+		inline pqxx::connection& db() { return *_db.get(); }
+		inline const pqxx::connection& db() const { return *_db.get(); }
+
 		void add_player(unsigned short playerid);
 		void delete_player(const std::unique_ptr<player>& player);
 		void delete_player(unsigned short playerid);

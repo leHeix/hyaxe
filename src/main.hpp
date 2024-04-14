@@ -27,7 +27,7 @@
 
 #include <urmem/urmem.hpp>
 #include <ankerl/unordered_dense.h>
-#include <pqxx/connection>
+#include <pqxx/pqxx>
 #include <uv.h>
 #include <botan_all.h>
 
