@@ -52,7 +52,7 @@ private:
 	unsigned short _skin{ 0u };
 
 	float _health{ 100.f };
-	float _armor{ 100.f };
+	float _armor{ 0.f };
 	float _hunger{ 0.f };
 	float _thirst{ 0.f };
 	float _pos_x{ 0.f };

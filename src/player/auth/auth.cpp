@@ -131,6 +131,8 @@ static void sex_dialog_callback(std::reference_wrapper<std::unique_ptr<player>> 
 	player->_pos_z = 23.8315f;
 	player->_angle = 45.1207f;
 	player->_skin = (response ? 250 : 192);
+	player->_health = 100.f;
+	player->_armor = 0.f;
 
 	uv_work_t* work = new uv_work_t;
 	work->data = reinterpret_cast<void*>(player->id());
