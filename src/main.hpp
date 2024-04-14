@@ -34,6 +34,7 @@
 #include "log.hpp"
 #include "memory.hpp"
 #include "raknet/rakserver.hpp"
+#include "samp_console.hpp"
 
 #include "server/publics.hpp"
 #include "player/player.hpp"

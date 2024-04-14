@@ -12,6 +12,19 @@ hyaxe::server::server()
 	ManualVehicleEngineAndLights();
 	ShowPlayerMarkers(PLAYER_MARKERS_MODE_GLOBAL);
 	SetNameTagDrawDistance(25.f);
+
+	SendRconCommand("hostname Hyaxe Roleplay [Rol en español]");
+	SendRconCommand("language Español / Spanish");
+	SendRconCommand("gamemodetext Roleplay / RPG");
+
+	samp_console_instance->modify_variable_flags("weather", CON_VARFLAG_READONLY);
+	samp_console_instance->modify_variable_flags("worldtime", CON_VARFLAG_READONLY);
+	samp_console_instance->modify_variable_flags("version", CON_VARFLAG_READONLY);
+	samp_console_instance->modify_variable_flags("mapname", CON_VARFLAG_READONLY);
+	samp_console_instance->set_variable("weburl", "hyaxe.com");
+	samp_console_instance->set_variable("lagcomp", "skinshot");
+	samp_console_instance->add_string_variable("versión de samp", CON_VARFLAG_RULE, "0.3.7", nullptr);
+	samp_console_instance->add_string_variable("discord", CON_VARFLAG_RULE, "discord.hyaxe.com", nullptr);
 }
 
 void hyaxe::server::add_player(unsigned short playerid)
@@ -42,6 +55,16 @@ static public_hook<callbacks::exec_order::init> _sv_init_ogmi("OnGameModeInit", 
 	}
 
 	console::print("rakserver initialized successfully");
+
+	samp_console_instance = std::make_unique<samp_console>();
+	if (!samp_console_instance->initialize(plugin_data))
+	{
+		console::print("failed to initialize samp_console");
+		std::terminate();
+		return ~1;
+	}
+
+	console::print("samp_console initialized successfully");
 
 	hyaxe::server_instance = std::make_unique<hyaxe::server>();
 	console::print("initialization finished");
