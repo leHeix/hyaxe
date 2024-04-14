@@ -39,5 +39,6 @@
 #include "player/player.hpp"
 #include "server/server.hpp"
 #include "server/timers.hpp"
+#include "player/auth/auth.hpp"
 
 inline void** plugin_data{ nullptr };

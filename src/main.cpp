@@ -1,8 +1,11 @@
 ﻿#include "main.hpp"
 
+extern void* pAMXFunctions;
+
 PLUGIN_EXPORT bool PLUGIN_CALL Load(void** ppData)
 {
 	plugin_data = ppData;
+	pAMXFunctions = ppData[PLUGIN_DATA_AMX_EXPORTS];
 
 	bool result = sampgdk::Load(ppData);
 	if (result)

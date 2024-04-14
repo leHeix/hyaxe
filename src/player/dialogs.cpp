@@ -1,6 +1,6 @@
 #include "../main.hpp"
 
-static public_hook _d_odr("OnDialogResponse", [](unsigned short playerid, short dialogid, bool response, int listitem, std::string inputtext) -> cell 
+static public_hook _dialogs_odr("OnDialogResponse", [](unsigned short playerid, short dialogid, bool response, int listitem, std::string inputtext) -> cell 
 {
 		auto& player = hyaxe::server_instance->get_player(playerid);
 		if (!player)

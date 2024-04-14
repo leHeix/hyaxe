@@ -58,3 +58,7 @@ if(UNIX)
 	target_link_libraries(hyaxe PRIVATE dl)
 	target_compile_definitions(hyaxe PRIVATE -D_GNU_SOURCE)
 endif()
+
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+	target_compile_options(hyaxe PRIVATE -Wno-invalid-source-encoding)
+endif()

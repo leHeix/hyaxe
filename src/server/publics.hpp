@@ -70,8 +70,17 @@ namespace callbacks
 					return 0;
 				}
 
+				console::print("calling callback with {} params (expects {})", params[0] / sizeof(cell), sizeof...(Args));
+
 				auto unpack = [=]<std::size_t... idx>(std::index_sequence<idx...>) -> cell
 				{
+					unsigned i = 1;
+					while (i <= sizeof...(Args))
+					{
+						console::print("params[{}] = {}", i, params[i]);
+						i++;
+					}
+
 					return fun(castable_cell{ amx, params[idx + 1] }...);
 				};
 

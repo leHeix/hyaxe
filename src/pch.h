@@ -15,6 +15,7 @@
 #include <functional>
 #include <regex>
 #include <source_location>
+#include <bitset>
 
 #else
 
