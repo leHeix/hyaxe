@@ -29,6 +29,7 @@
 #include <ankerl/unordered_dense.h>
 #include <pqxx/connection>
 #include <uv.h>
+#include <botan_all.h>
 
 #include "log.hpp"
 #include "memory.hpp"

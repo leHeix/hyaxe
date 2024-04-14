@@ -43,7 +43,7 @@ target_link_libraries(hyaxe PRIVATE
 	$<IF:$<TARGET_EXISTS:libuv::uv_a>,libuv::uv_a,libuv::uv>
 	Botan
 )
-target_include_directories(hyaxe PRIVATE ./lib ./lib/unordered_dense/include ${BOTAN_SRC_DIR}/include)
+target_include_directories(hyaxe PRIVATE ./lib ./lib/unordered_dense/include ${BOTAN_DIR}/include)
 set_target_properties(hyaxe PROPERTIES
 	UNITY_BUILD ON
 	UNITY_BUILD_BATCH_SIZE 15

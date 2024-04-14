@@ -1,5 +1,4 @@
-
-set(BOTAN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/$<IF:$<CONFIG:Debug>,debug,release>/$<IF:$<PLATFORM_ID:Windows>,win,linux>)
+set(BOTAN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/$<IF:$<CONFIG:Debug>,debug,release>/$<IF:$<PLATFORM_ID:Windows>,win,linux> CACHE INTERNAL "")
 
 add_library(Botan STATIC
 	"${BOTAN_DIR}/src/botan_all.cpp"
