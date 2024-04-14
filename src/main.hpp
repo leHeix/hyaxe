@@ -9,6 +9,8 @@
 	#define FASTCALL __attribute__((fastcall))
 #endif
 
+#define UV_THREADPOOL_SIZE 12
+
 #include <fmt/core.h>
 #include <fmt/color.h>
 #include <fmt/chrono.h>

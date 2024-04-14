@@ -13,6 +13,9 @@ set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 set(VCPKG_TARGET_ARCHITECTURE x86)
 set(VCPKG_LIBRARY_LINKAGE static)
 set(VCPKG_CRT_LINKAGE static)
+set(THREADS_PREFER_PTHREAD_FLAG TRUE)
+set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
+find_package(Threads REQUIRED)
 find_package(fmt CONFIG REQUIRED)
 find_package(libpqxx CONFIG REQUIRED)
 find_package(libuv CONFIG REQUIRED)
@@ -38,8 +41,9 @@ target_link_libraries(hyaxe PRIVATE
 	unordered_dense::unordered_dense
 	libpqxx::pqxx
 	$<IF:$<TARGET_EXISTS:libuv::uv_a>,libuv::uv_a,libuv::uv>
+	Botan
 )
-target_include_directories(hyaxe PRIVATE ./lib ./lib/unordered_dense/include)
+target_include_directories(hyaxe PRIVATE ./lib ./lib/unordered_dense/include ${BOTAN_SRC_DIR}/include)
 set_target_properties(hyaxe PROPERTIES
 	UNITY_BUILD ON
 	UNITY_BUILD_BATCH_SIZE 15

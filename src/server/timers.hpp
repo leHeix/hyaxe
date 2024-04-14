@@ -6,7 +6,7 @@
 
 class timer : public std::enable_shared_from_this<timer>
 {
-	uv_timer_t _handle{};
+	uv_timer_t* _handle{ nullptr };
 	std::function<void()> _callback{};
 	std::shared_ptr<timer> _self_reference{};
 	bool _stopped_completely{ false };
@@ -16,12 +16,15 @@ public:
 	template<class... Args>
 	timer(const std::function<void(Args...)>& cb, Args&&... args)
 	{
+		_handle = new uv_timer_t;
 		_callback = std::bind(cb, std::forward<Args>(args)...);
 
-		uv_timer_init(uv_default_loop(), &_handle);
-		_handle.data = reinterpret_cast<void*>(this);
+		uv_timer_init(uv_default_loop(), _handle);
+		_handle->data = reinterpret_cast<void*>(this);
 		uv_update_time(uv_default_loop());
 	}
+
+	~timer();
 
 	template<class... Args>
 	[[nodiscard]] inline static std::shared_ptr<timer> create(const std::function<void(Args...)>& cb, Args... args)
@@ -44,7 +47,7 @@ public:
 	inline void stop();
 
 	template<class... Args>
-	inline void set_callback(const std::function<void(Args...)>& cb, Args&&... args)
+	inline void set_callback(const std::function<void(Args...)>& cb, Args... args)
 	{
 		_callback = std::bind(cb, std::forward<Args>(args)...);
 	}

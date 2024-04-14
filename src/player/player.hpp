@@ -44,8 +44,17 @@ public:
 	inline std::string name() const { return _name; }
 	inline bool& kicked() { return _kicked; }
 	inline const bool& kicked() const { return _kicked; }
+	inline const auto& dialog_cb() const { return _dialog_cb; }
+	inline auto& dialog_cb() { return _dialog_cb; }
+	inline unsigned int ip() const { return rakserver_instance->get_playerid_from_index(_playerid).binaryAddress; }
+	inline std::string ip_as_string() const 
+	{ 
+		std::string ip{ 16, '\0' };
+		GetPlayerIp(_playerid, ip.data(), 16);
+		return ip;
+	}
 
 	inline bool toggle_spectating(bool toggle) { return TogglePlayerSpectating(_playerid, toggle); }
-	inline void set_dialog_cb(const std::function<void(bool response, int listitem, std::string inputtext)>& cb) { _dialog_cb = cb; }
 	inline bool show_dialog(unsigned char style, const std::string_view title, const std::string_view body, const std::string_view button1, const std::string_view button2 = "") { return ShowPlayerDialog(_playerid, 422, style, title.data(), body.data(), button1.data(), button2.data()); }
+	
 };

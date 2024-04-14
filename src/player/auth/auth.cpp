@@ -7,11 +7,9 @@ static public_hook _auth_opc("OnPlayerConnect", [](unsigned short playerid) -> c
 	if (!std::regex_match(player->name(), name_regex))
 	{
 		player->kicked() = true;
-		player->set_dialog_cb(nullptr);
+		player->dialog_cb() = nullptr;
 		player->show_dialog(DIALOG_STYLE_MSGBOX, "{CB3126}Hyaxe", 
-			"{DADADA}Tu nombre no es adecuado, usa: {CB3126}N{DADADA}ombre_{CB3126}A{DADADA}pellido.\n\
-            Recuerda que los nombres como {CB3126}Miguel_Gamer{DADADA} o que contengan insultos\n\
-            no están permitidos, procura ponerte un nombre que parezca real.",
+			"{DADADA}Tu nombre no es adecuado, usa: {CB3126}N{DADADA}ombre_{CB3126}A{DADADA}pellido.\nRecuerda que los nombres como {CB3126}Miguel_Gamer{DADADA} o que contengan insultos\nno están permitidos, procura ponerte un nombre que parezca real.",
 		"Entendido");
 		
 		std::function<void(unsigned short)> timer_cb = [](unsigned short playerid) {
@@ -22,6 +20,10 @@ static public_hook _auth_opc("OnPlayerConnect", [](unsigned short playerid) -> c
 
 		return ~1;
 	}
+
+	EnablePlayerCameraTarget(playerid, true);
+
+
 
 	return 1;
 });
